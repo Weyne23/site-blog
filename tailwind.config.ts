@@ -1,14 +1,15 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
 
 export default {
-    darkMode: ['class'],
-    content: [
+  darkMode: ['class'],
+  content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/templates/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-  	container: {
+    container: {
       center: true,
       padding: '2rem',
       screens: {
@@ -62,6 +63,8 @@ export default {
         'body-md': ['16px', { lineHeight: '150%', fontWeight: '400' }],
         'body-sm': ['14px', { lineHeight: '150%', fontWeight: '400' }],
         'body-xs': ['12px', { lineHeight: '150%', fontWeight: '400' }],
+
+        // Body Tag
         'body-tag': ['12px', { lineHeight: '100%', fontWeight: '400' }],
 
         // Action - Inter
@@ -70,6 +73,6 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config
-
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  plugins: [require('tailwindcss-animate')],
+} satisfies Config;
