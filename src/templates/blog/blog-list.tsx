@@ -32,22 +32,22 @@ export default function BlogList() {
             </header>
             {/*Listagem de posts*/}
             {hasPosts && (
-            <PostGridCard>
-                {posts.map((post) => (
-                    <PostCard
-                        key={post._id}
-                        slug={post.slug}
-                        title={post.title}
-                        description={post.description}
-                        date={new Date(post.date).toLocaleDateString("pt-BR")}
-                        image={post.image}
-                        author={{
-                            name: post.author.name,
-                            avatar: post.author.avatar
-                        }}
-                    />
-                ))}
-            </PostGridCard>
+                <PostGridCard>
+                    {posts.map((post) => (
+                        <PostCard
+                            key={post._id}
+                            slug={post.slug}
+                            title={post.title}
+                            description={post.description}
+                            date={new Date(post.date).toLocaleDateString("pt-BR")}
+                            image={post.image}
+                            author={{
+                                name: post.author.name,
+                                avatar: post.author.avatar
+                            }}
+                        />
+                    ))}
+                </PostGridCard>
             )}
             {!hasPosts && (
                 <div className="container px-8">
