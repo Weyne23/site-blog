@@ -5,12 +5,24 @@ import { allPosts } from "contentlayer/generated";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Avatar } from "@/components/Avatar";
 import { Markdown } from "@/components/Markdown";
+import { Button } from "@/components/ui/button";
+import { useShare } from "@/hooks/useShare";
 
 export default function PostPage() {
     const router = useRouter();
     const slug = router.query.slug as string;
-    const post = allPosts.find((posts) => posts.slug.toLowerCase() === slug?.toLowerCase())!;
+    console.log('Slug: ', slug);
+    const post = allPosts.find((posts) => posts.slug?.toLowerCase() === slug?.toLowerCase())!;
+    console.log('Post: ',post)
     const publishDate = new Date(post?.date).toLocaleDateString("pt-BR");
+
+    const postUrl = `https://site.set/blog/${slug}`;
+
+    const { shareButtons } = useShare({
+        url: postUrl,
+        title: post?.title,
+        text: post?.description
+    })
 
     return (
         <main className="mt-32 text-gray-100">
@@ -45,7 +57,7 @@ export default function PostPage() {
                         </h1>
 
                         <Avatar.Container>
-                            <Avatar.Image src={post?.author.avatar} alt={post?.title}/>
+                            <Avatar.Image src={post?.author.avatar} alt={post?.title} size="sm"/>
                             <Avatar.Content>
                                 <Avatar.Title>{post?.author.name}</Avatar.Title>
                                 <Avatar.Description>
@@ -55,9 +67,26 @@ export default function PostPage() {
                         </Avatar.Container>
                     </header>
                     <div className="prose prove-invert max-w-none px-4 mt-12 md:px-6 lg:px-12">
-                        <Markdown content={post.body.raw}/>
+                        <Markdown content={post?.body.raw}/>
                     </div>
                 </article>
+                <aside className="space-y-6">
+                    <div className="rounded-lg bg-gray-700">
+                        <h2 className="mb-4 text-heading-xs text-gray-100">Compartilhar</h2>
+                        <div className="space-y-3">
+                            {
+                                shareButtons.map((provider) => (
+                                    <Button 
+                                        key={provider.provider}
+                                        onClick={() => provider.action()}
+                                        variant="outline"
+                                        className="w-full justify-start gap-2"
+                                    >{provider.icon}{provider.name}</Button>
+                                ))
+                            }
+                        </div>
+                    </div>
+                </aside>
             </div>
             </div>
         </main>
