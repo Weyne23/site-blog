@@ -22,8 +22,8 @@ export const Search = () => {
         const newQuery = e.target.value
 
         router.push(`/blog?q=${encodeURIComponent(newQuery)}`, undefined, {
-            shallow: true,
-            scroll: false
+            shallow: true,//Atualiza o path da pagina atual sem recarregar a pagina
+            scroll: false//A cada atualização ele retorna para o topo da pagina
         })
     }
 
