@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
 import { CircleX, SearchIcon } from "lucide-react"
 import { useRouter } from "next/router"
-import { truncate } from "node:fs/promises";
 import { useCallback } from "react";
 
 export const Search = () => {

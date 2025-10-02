@@ -1,22 +1,23 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { allPosts } from "contentlayer/generated";
+import { Post } from "contentlayer/generated";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Avatar } from "@/components/Avatar";
 import { Markdown } from "@/components/Markdown";
 import { Button } from "@/components/ui/button";
 import { useShare } from "@/hooks/useShare";
 
-export const PostPage = () => {
-    const router = useRouter();
-    const slug = router.query.slug as string;
-    console.log('Slug: ', slug);
-    const post = allPosts.find((posts) => posts.slug?.toLowerCase() === slug?.toLowerCase())!;
-    console.log('Post: ',post)
+export type PostPageProps = {
+    post: Post;
+}
+
+export const PostPage = ({ post }: PostPageProps) => {
+    //const router = useRouter();
+    //const slug = router.query.slug as string;
+    // const post = allPosts.find((posts) => posts.slug?.toLowerCase() === slug?.toLowerCase())!;
     const publishDate = new Date(post?.date).toLocaleDateString("pt-BR");
 
-    const postUrl = `https://site.set/blog/${slug}`;
+    const postUrl = `https://site.set/blog/${post.slug}`;
 
     const { shareButtons } = useShare({
         url: postUrl,
@@ -25,8 +26,8 @@ export const PostPage = () => {
     })
 
     return (
-        <main className="mt-32 text-gray-100">
-            <div className="container space-y-12 px-4 md:px-8">
+        <main className="py-20 text-gray-100">
+            <div className="container space-y-8 px-4 md:px-8">
                 <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>
