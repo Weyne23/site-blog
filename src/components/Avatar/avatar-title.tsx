@@ -1,5 +1,3 @@
-import Image, { ImageProps } from "next/image"
-
 type AvatarTitleProps = {
     children: React.ReactNode
 }

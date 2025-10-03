@@ -1,4 +1,4 @@
-import { CallToAction, CustomerStorySection, FeatureSection, HeroSection, SupportSection } from "./section"
+import { CustomerStorySection, FeatureSection, HeroSection, SupportSection } from "./section"
 
 export const LadingPage = () => {
     return (
