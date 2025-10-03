@@ -7,14 +7,14 @@ type useShareProps = ShareConfig & {
     clipboardTimeout?: number
 }
 
-export const useShare = ({url, title, text, clipboardTimeout = 2000}: useShareProps) => {
+export const useShare = ({url, title, description, clipboardTimeout = 2000}: useShareProps) => {
     const { isCopied, handleCopy} = useClipboard({ timeout: clipboardTimeout})
 
     const shareConfig = useMemo(() => ({
         url,
         ...(title && {title}),
-        ...(text && {text})
-    }), [text, title, url])
+        ...(description && {description})
+    }), [description, title, url])
 
     const share = useCallback(async (provider: SocialProvider) => {
         try{

@@ -4,8 +4,7 @@ import { Post } from "contentlayer/generated";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Avatar } from "@/components/Avatar";
 import { Markdown } from "@/components/Markdown";
-import { Button } from "@/components/ui/button";
-import { useShare } from "@/hooks/useShare";
+import { PostShare } from "./components/PostShare";
 
 export type PostPageProps = {
     post: Post;
@@ -18,12 +17,6 @@ export const PostPage = ({ post }: PostPageProps) => {
     const publishDate = new Date(post?.date).toLocaleDateString("pt-BR");
 
     const postUrl = `https://site.set/blog/${post.slug}`;
-
-    const { shareButtons } = useShare({
-        url: postUrl,
-        title: post?.title,
-        text: post?.description
-    })
 
     return (
         <main className="py-20 text-gray-100">
@@ -71,27 +64,8 @@ export const PostPage = ({ post }: PostPageProps) => {
                         <Markdown content={post?.body.raw}/>
                     </div>
                 </article>
-                <aside className="space-y-6">
-                    <div className="rounded-lg bg-gray-700">
-                        <h2 className="hidden md:block mb-4 text-heading-xs text-gray-100">Compartilhar</h2>
-                        <div className="flex justify-between md:flex-col gap-2">
-                            {
-                                shareButtons.map((provider) => (
-                                    <Button 
-                                        key={provider.provider}
-                                        onClick={() => provider.action()}
-                                        variant="outline"
-                                        className="w-fit md:w-full justify-start gap-2"
-                                    >{provider.icon}
-                                    <span className="hidden md:block">
-                                        {provider.name}
-                                    </span>
-                                    </Button>
-                                ))
-                            }
-                        </div>
-                    </div>
-                </aside>
+
+                <PostShare url={postUrl} description={post.title} title={post.title}/>
             </div>
             </div>
         </main>
