@@ -16,7 +16,7 @@ export const PostPage = ({ post }: PostPageProps) => {
     // const post = allPosts.find((posts) => posts.slug?.toLowerCase() === slug?.toLowerCase())!;
     const publishDate = new Date(post?.date).toLocaleDateString("pt-BR");
 
-    const postUrl = `https://site.set/blog/${post.slug}`;
+    const postUrl = `https://site-blog-gray.vercel.app/${post.slug}`;
 
     return (
         <main className="py-20 text-gray-100">
